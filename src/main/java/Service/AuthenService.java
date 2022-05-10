@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HexFormat;
 import java.util.List;
 
 public class AuthenService {
@@ -24,7 +25,7 @@ public class AuthenService {
             String query = "EXEC SP_AUTHEN_NHANVIEN " + username + "," + password;
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
-                Employee e=new Employee(rs.getString("MANV"),rs.getString("HOTEN"),rs.getString("EMAIL"),rs.getString("LUONG"),rs.getString("TENDN"),rs.getString("MATKHAU"),rs.getString("PUBKEY"));
+                Employee e=new Employee(rs.getString("MANV"),rs.getString("HOTEN"),rs.getString("EMAIL"),HexFormat.of().parseHex(rs.getString("LUONG").substring(2)),rs.getString("TENDN"), HexFormat.of().parseHex(rs.getString("MATKHAU").substring(2)),rs.getString("PUBKEY"));
                 resultList.add(e);
             }
         }catch (SQLException exception) {

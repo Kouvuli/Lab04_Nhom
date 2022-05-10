@@ -9,11 +9,27 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CryptoService {
-//    genkey
+    //    genkey
 //
 //    public String encryptRSA(String pubKey,String value,String password) throws SQLException {
 //
 //    }
+    public void createKey(String keyName, String keyPassword) throws SQLException {
+        JDBCUtils utils=new JDBCUtils();
+        Connection connection = utils.getConnection();
+        Statement stmt = null;
+        String encryptResult=null;
+        try{
+            stmt = connection.createStatement();
+            String query="EXEC SP_CREATE_ASYM_KEY '"+keyName+"','"+keyPassword+"'";
+            stmt.execute(query);
+        } catch (SQLException exception) {
+            exception.printStackTrace();
+        }finally {
+            stmt.close();
+        }
+
+    }
     public String encryptRSA(String pubKey,String value,String password) throws SQLException {
         JDBCUtils utils=new JDBCUtils();
         Connection connection = utils.getConnection();

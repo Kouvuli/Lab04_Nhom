@@ -42,7 +42,7 @@ public class MarkController implements Initializable {
             CryptoService cryptoService=new CryptoService();
 
             if(Float.parseFloat(markTxt.getText())<=10.0 && Float.parseFloat(markTxt.getText())>=0.0){
-                markService.updateMark(maSV,maHP,cryptoService.encryptRSA(MainViewController.pubKey,markTxt.getText(), MainViewController.privateKey));
+                markService.updateMark(maSV,maHP,cryptoService.encryptRSA(MainViewController.pubKey,markTxt.getText(), MainViewController.priKey));
                 Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
                 window.close();
             }

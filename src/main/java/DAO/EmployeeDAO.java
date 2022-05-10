@@ -6,6 +6,7 @@ import Utils.HibernateUtils;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -16,6 +17,11 @@ import java.util.List;
 public class EmployeeDAO implements DAOInterface<Employee> {
     @Override
     public int addData(Employee data) {
+        Session session=HibernateUtils.getFACTORY().openSession();
+        Transaction transaction=session.beginTransaction();
+        session.save(data);
+        transaction.commit();
+        session.close();
         return 0;
     }
 
@@ -57,9 +63,10 @@ public class EmployeeDAO implements DAOInterface<Employee> {
         CriteriaQuery query=cb.createQuery(Employee.class);
         Root<Employee>root=query.from(Employee.class);
         String str=String.format("%%%s%%",username);
-        query.where(cb.like(root.get("username").as(String.class),str));
+        query.where(cb.equal(root.get("username").as(String.class),username));
         Employee employee =(Employee) session.createQuery(query).getSingleResult();
         session.close();
         return employee;
     }
+
 }

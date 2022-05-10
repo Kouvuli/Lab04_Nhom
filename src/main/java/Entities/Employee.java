@@ -18,13 +18,13 @@ public class Employee implements Serializable {
     private String email;
 
     @Column(name = "LUONG")
-    private String salary;
+    private byte[] salary;
 
     @Column(name = "TENDN")
     private String username;
 
     @Column(name = "MATKHAU")
-    private String password;
+    private byte[] password;
 
     @Column(name = "PUBKEY")
     private String pubKey;
@@ -35,7 +35,7 @@ public class Employee implements Serializable {
     public Employee() {
     }
 
-    public Employee(String id, String name, String email, String salary, String username, String password, String pubKey) {
+    public Employee(String id, String name, String email, byte[] salary, String username, byte[] password, String pubKey) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -70,11 +70,11 @@ public class Employee implements Serializable {
         this.email = email;
     }
 
-    public String getSalary() {
+    public byte[] getSalary() {
         return salary;
     }
 
-    public void setSalary(String salary) {
+    public void setSalary(byte[] salary) {
         this.salary = salary;
     }
 
@@ -86,11 +86,11 @@ public class Employee implements Serializable {
         this.username = username;
     }
 
-    public String getPassword() {
+    public byte[] getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(byte[] password) {
         this.password = password;
     }
 
