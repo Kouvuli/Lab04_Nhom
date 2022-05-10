@@ -1,6 +1,5 @@
 package Controllers;
 
-import DAO.EmployeeDAO;
 import Entities.Employee;
 import Service.AuthenService;
 import Utils.HashUtil;
@@ -60,8 +59,8 @@ public class LoginController implements Initializable {
                     window.close();
                     Stage newWindnow = new Stage();
 
-                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/Layouts/class-list.fxml"));
-                    ClassListController controller=new ClassListController();
+                    FXMLLoader loader=new FXMLLoader(getClass().getResource("/Layouts/main-view.fxml"));
+                    MainViewController controller=new MainViewController();
                     controller.setValue(username.getText());
                     loader.setController(controller);
 

@@ -1,6 +1,5 @@
 package Controllers;
 
-import DAO.MarkDAO;
 import Entities.Mark;
 import Service.CryptoService;
 import Service.MarkService;
@@ -14,7 +13,6 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class MarkController implements Initializable {
@@ -44,7 +42,7 @@ public class MarkController implements Initializable {
             CryptoService cryptoService=new CryptoService();
 
             if(Float.parseFloat(markTxt.getText())<=10.0 && Float.parseFloat(markTxt.getText())>=0.0){
-                markService.updateMark(maSV,maHP,cryptoService.encryptRSA(ClassListController.pubKey,markTxt.getText(),ClassListController.privateKey));
+                markService.updateMark(maSV,maHP,cryptoService.encryptRSA(MainViewController.pubKey,markTxt.getText(), MainViewController.privateKey));
                 Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
                 window.close();
             }

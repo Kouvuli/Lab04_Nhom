@@ -16,7 +16,7 @@ public class Main extends Application {
             stage.setTitle("Đăng nhập");
             stage.setScene(scene);
             stage.show();
-
+            System.out.println("ádjaskdja");
 
         }
         public static void main(String[] args) {

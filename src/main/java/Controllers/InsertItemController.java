@@ -86,7 +86,7 @@ public class InsertItemController implements Initializable {
             String a=hashUtil.bytesToHex(diemEncrypt);
             String diem=null;
             try {
-                diem= cryptoService.decryptRSA(ClassListController.pubKey,a,ClassListController.privateKey);
+                diem= cryptoService.decryptRSA(MainViewController.pubKey,a, MainViewController.privateKey);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

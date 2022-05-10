@@ -9,6 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CryptoService {
+//    genkey
+//
+//    public String encryptRSA(String pubKey,String value,String password) throws SQLException {
+//
+//    }
     public String encryptRSA(String pubKey,String value,String password) throws SQLException {
         JDBCUtils utils=new JDBCUtils();
         Connection connection = utils.getConnection();
@@ -53,6 +58,7 @@ public class CryptoService {
         }
         return decryptResult;
     }
+
 //    public String encryptAES(String pubKey,String value,String password) throws SQLException {
 //        JDBCUtils utils=new JDBCUtils();
 //        Connection connection = utils.getConnection();
