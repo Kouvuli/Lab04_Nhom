@@ -55,25 +55,31 @@ public class InsertEmpController implements Initializable {
                 employee = dao.getEmployeeById(empId.getText());
             }
             catch (Exception e){
-                employee = dao.getEmployeeByUserName(empUsername.getText().trim());
+                if (employee!=null){
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Lỗi");
+                    alert.setContentText("Mã nhân viên đã tồn tại!");
+                    alert.showAndWait();
+                }
+                else{
+                    CryptoService cryptoService=new CryptoService();
+                    HashUtil hashUtil=new HashUtil();
+                    String hashPassword=hashUtil.getSHA1(empPassword.getText());
+                    cryptoService.createKey(empId.getText(), hashPassword);
+                    String encryptSal=cryptoService.encryptRSA(empId.getText(),empSal.getText(),hashPassword);
+                    Employee newEmployee = new Employee(empId.getText(), empName.getText(), empEmail.getText(), HexFormat.of().parseHex(encryptSal.substring(2)), empUsername.getText(), HexFormat.of().parseHex(hashPassword.substring(2)), empId.getText());
+                    dao.addData(newEmployee);
+                    Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
+                    window.close();
+                }
             }
-            if (employee!=null){
+            if(employee!=null){
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Lỗi");
-                alert.setContentText("Mã nhân viên đã tồn tại!");
+                alert.setContentText("Username đã tồn tại!");
                 alert.showAndWait();
             }
-            else{
-                CryptoService cryptoService=new CryptoService();
-                HashUtil hashUtil=new HashUtil();
-                String hashPassword=hashUtil.getSHA1(empPassword.getText());
-                cryptoService.createKey(empId.getText(), hashPassword);
-                String encryptSal=cryptoService.encryptRSA(empId.getText(),empSal.getText(),hashPassword);
-                Employee newEmployee = new Employee(empId.getText(), empName.getText(), empEmail.getText(), HexFormat.of().parseHex(encryptSal.substring(2)), empUsername.getText(), HexFormat.of().parseHex(hashPassword.substring(2)), empId.getText());
-                dao.addData(newEmployee);
-                Stage window=(Stage) ((Node)event.getSource()).getScene().getWindow();
-                window.close();
-            }
+
         }
 
 

@@ -11,6 +11,7 @@ import org.hibernate.query.NativeQuery;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
@@ -63,7 +64,8 @@ public class EmployeeDAO implements DAOInterface<Employee> {
         CriteriaQuery query=cb.createQuery(Employee.class);
         Root<Employee>root=query.from(Employee.class);
         String str=String.format("%%%s%%",username);
-        query.where(cb.equal(root.get("username").as(String.class),username));
+        Predicate p1=cb.equal(root.get("username"),username);
+        query.where(p1);
         Employee employee =(Employee) session.createQuery(query).getSingleResult();
         session.close();
         return employee;

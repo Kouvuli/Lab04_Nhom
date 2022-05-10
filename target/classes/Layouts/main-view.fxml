@@ -19,15 +19,6 @@
                <content>
                   <VBox>
                      <children>
-                        <HBox>
-                           <children>
-                              <Region HBox.hgrow="ALWAYS" />
-                              <Button mnemonicParsing="false" text="Thêm" />
-                           </children>
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                           </padding>
-                        </HBox>
                         <ListView fx:id="classList" prefHeight="398.4" prefWidth="175.2" />
                      </children>
                   </VBox>
